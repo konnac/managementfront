@@ -1,0 +1,71 @@
+<svg width="32" height="32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="logoGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="logoGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <circle cx="100" cy="100" r="90" fill="url(#logoGradient1)"/>
+  
+  <g transform="translate(100, 60)">
+    <circle cx="0" cy="0" r="18" fill="white" fill-opacity="0.95"/>
+    <rect x="-10" y="-6" width="20" height="12" rx="2" fill="url(#logoGradient1)"/>
+  </g>
+  
+  <line x1="100" y1="78" x2="100" y2="95" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  
+  <g transform="translate(60, 110)">
+    <circle cx="0" cy="0" r="15" fill="white" fill-opacity="0.9"/>
+    <rect x="-8" y="-5" width="16" height="10" rx="2" fill="url(#logoGradient2)"/>
+  </g>
+  
+  <g transform="translate(100, 110)">
+    <circle cx="0" cy="0" r="15" fill="white" fill-opacity="0.9"/>
+    <rect x="-8" y="-5" width="16" height="10" rx="2" fill="url(#logoGradient2)"/>
+  </g>
+  
+  <g transform="translate(140, 110)">
+    <circle cx="0" cy="0" r="15" fill="white" fill-opacity="0.9"/>
+    <rect x="-8" y="-5" width="16" height="10" rx="2" fill="url(#logoGradient2)"/>
+  </g>
+  
+  <line x1="100" y1="95" x2="60" y2="95" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <line x1="100" y1="95" x2="140" y2="95" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <line x1="60" y1="95" x2="60" y2="110" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <line x1="100" y1="95" x2="100" y2="110" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <line x1="140" y1="95" x2="140" y2="110" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  
+  <g transform="translate(45, 145)">
+    <circle cx="0" cy="0" r="10" fill="white" fill-opacity="0.8"/>
+    <rect x="-5" y="-3" width="10" height="6" rx="1" fill="url(#logoGradient3)"/>
+  </g>
+  
+  <g transform="translate(75, 145)">
+    <circle cx="0" cy="0" r="10" fill="white" fill-opacity="0.8"/>
+    <rect x="-5" y="-3" width="10" height="6" rx="1" fill="url(#logoGradient3)"/>
+  </g>
+  
+  <g transform="translate(125, 145)">
+    <circle cx="0" cy="0" r="10" fill="white" fill-opacity="0.8"/>
+    <rect x="-5" y="-3" width="10" height="6" rx="1" fill="url(#logoGradient3)"/>
+  </g>
+  
+  <g transform="translate(155, 145)">
+    <circle cx="0" cy="0" r="10" fill="white" fill-opacity="0.8"/>
+    <rect x="-5" y="-3" width="10" height="6" rx="1" fill="url(#logoGradient3)"/>
+  </g>
+  
+  <line x1="60" y1="125" x2="45" y2="135" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <line x1="60" y1="125" x2="75" y2="135" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <line x1="140" y1="125" x2="125" y2="135" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <line x1="140" y1="125" x2="155" y2="135" stroke="white" stroke-width="2" stroke-linecap="round"/>
+</svg>
