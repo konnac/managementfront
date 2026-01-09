@@ -27,10 +27,11 @@ export function downloadDocument(id) {
   })
 }
 
-export function deleteDocument(id) {
+export function deleteDocument(projectId, id) {
   return request({
-    url: `/documents/${id}`,
-    method: 'delete'
+    url: '/documents',
+    method: 'delete',
+    params: { projectId, id }
   })
 }
 
@@ -38,5 +39,14 @@ export function getDocumentCategories() {
   return request({
     url: '/documents/categories',
     method: 'get'
+  })
+}
+
+export function updateDocument(projectId, data) {
+  return request({
+    url: '/documents',
+    method: 'put',
+    params: { projectId },
+    data
   })
 }

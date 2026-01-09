@@ -31,7 +31,6 @@
         <h3>任务成员列表</h3>
         <div class="header-actions">
           <el-button type="success" @click="showAddMemberDialog" v-if="canManageMembers">添加成员</el-button>
-          <el-button type="primary" @click="showBatchAddDialog" v-if="canManageMembers">批量添加</el-button>
         </div>
       </div>
       
@@ -141,15 +140,6 @@
       @confirm="handleAddMember"
     ></task-member-form-modal>
     
-    <!-- 批量添加成员对话框 -->
-    <task-member-batch-add-modal
-      :visible.sync="batchAddDialogVisible"
-      title="批量添加任务成员"
-      :member="batchAddForm"
-      :available-users="availableUsers"
-      @confirm="handleBatchAdd"
-    ></task-member-batch-add-modal>
-    
     <!-- 修改角色对话框 -->
     <task-member-form-modal
       :visible.sync="editRoleDialogVisible"
@@ -162,18 +152,16 @@
 </template>
 
 <script>
-import { getTaskMembers, addTaskMember, addTaskMembers, deleteTaskMembers, updateTaskMemberRole, activateTaskMember } from '../api/taskMembers'
+import { getTaskMembers, addTaskMember, deleteTaskMembers, updateTaskMemberRole, activateTaskMember } from '../api/taskMembers'
 import { getTaskDetail } from '../api/tasks'
 import { getProjectMembers } from '../api/projects'
 import { mapGetters } from 'vuex'
 import TaskMemberFormModal from '../components/TaskMemberFormModal.vue'
-import TaskMemberBatchAddModal from '../components/TaskMemberBatchAddModal.vue'
 
 export default {
   name: 'TaskMembersView',
   components: {
-    TaskMemberFormModal,
-    TaskMemberBatchAddModal
+    TaskMemberFormModal
   },
   data() {
     return {
@@ -203,14 +191,9 @@ export default {
       availableUsers: [],
       usersLoaded: false,
       addMemberDialogVisible: false,
-      batchAddDialogVisible: false,
       editRoleDialogVisible: false,
       addMemberForm: {
         userId: null,
-        taskRole: 'COLLABORATOR'
-      },
-      batchAddForm: {
-        userIds: [],
         taskRole: 'COLLABORATOR'
       },
       editRoleForm: {
@@ -407,14 +390,6 @@ export default {
       this.loadAvailableUsers()
       this.addMemberDialogVisible = true
     },
-    showBatchAddDialog() {
-      this.batchAddForm = {
-        userIds: [],
-        taskRole: 'COLLABORATOR'
-      }
-      this.loadAvailableUsers()
-      this.batchAddDialogVisible = true
-    },
     showEditRoleDialog(member) {
       this.editRoleForm = {
         id: member.id,
@@ -437,18 +412,6 @@ export default {
         this.loadMembersList()
       } catch (error) {
         this.$message.error('添加成员失败')
-        console.error(error)
-      }
-    },
-    async handleBatchAdd(formData) {
-      try {
-        await addTaskMembers(this.projectId, this.taskId, formData.userIds)
-        this.$message.success('批量添加成功')
-        this.batchAddDialogVisible = false
-        this.usersLoaded = false
-        this.loadMembersList()
-      } catch (error) {
-        this.$message.error('批量添加失败')
         console.error(error)
       }
     },

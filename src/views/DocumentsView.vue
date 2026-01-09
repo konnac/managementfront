@@ -101,6 +101,7 @@
           <template slot-scope="scope">
             <div style="display: flex; justify-content: center; gap: 8px;">
               <el-button type="primary" size="small" @click="handleDownload(scope.row)">下载</el-button>
+              <el-button type="warning" size="small" @click="handleEdit(scope.row)">编辑</el-button>
               <el-button type="danger" size="small" @click="handleDelete(scope.row.id)">删除</el-button>
             </div>
           </template>
@@ -125,17 +126,26 @@
       :project-id="projectId"
       @confirm="handleUploadSuccess"
     ></document-upload-modal>
+    
+    <document-edit-modal
+      :visible.sync="editDialogVisible"
+      :document="currentDocument"
+      :project-id="projectId"
+      @confirm="handleEditSuccess"
+    ></document-edit-modal>
   </div>
 </template>
 
 <script>
 import { getProjectDocuments, downloadDocument, deleteDocument } from '../api/documents'
 import DocumentUploadModal from '../components/DocumentUploadModal.vue'
+import DocumentEditModal from '../components/DocumentEditModal.vue'
 
 export default {
   name: 'DocumentsView',
   components: {
-    DocumentUploadModal
+    DocumentUploadModal,
+    DocumentEditModal
   },
   data() {
     return {
@@ -155,7 +165,9 @@ export default {
         pageSize: 10,
         total: 0
       },
-      uploadDialogVisible: false
+      uploadDialogVisible: false,
+      editDialogVisible: false,
+      currentDocument: null
     }
   },
   created() {
@@ -315,6 +327,14 @@ export default {
       this.loadDocuments()
       this.$message.success('文档上传成功')
     },
+    handleEdit(doc) {
+      this.currentDocument = doc
+      this.editDialogVisible = true
+    },
+    handleEditSuccess() {
+      this.loadDocuments()
+      this.$message.success('文档更新成功')
+    },
     async handleDownload(doc) {
   try {
     console.log('开始下载文档，文档ID:', doc.id, '文件名:', doc.fileName)
@@ -367,7 +387,7 @@ export default {
         type: 'warning'
       }).then(async () => {
         try {
-          await deleteDocument(id)
+          await deleteDocument(this.projectId, id)
           this.$message.success('文档删除成功')
           this.loadDocuments()
         } catch (error) {
@@ -387,7 +407,7 @@ export default {
         type: 'warning'
       }).then(async () => {
         try {
-          const deletePromises = this.selectedDocuments.map(doc => deleteDocument(doc.id))
+          const deletePromises = this.selectedDocuments.map(doc => deleteDocument(this.projectId, doc.id))
           await Promise.all(deletePromises)
           this.$message.success('批量删除成功')
           this.loadDocuments()
