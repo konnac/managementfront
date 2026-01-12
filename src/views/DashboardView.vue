@@ -53,7 +53,19 @@
           </div>
         </el-tooltip>
       </el-card>
-      
+
+      <el-card class="stat-card" shadow="hover" v-if="isAdmin">
+        <div class="stat-content">
+          <div class="stat-icon hour-icon">
+            <i class="el-icon-timer"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-number">{{ stats.totalHour }}</div>
+            <div class="stat-label">总工时</div>
+          </div>
+        </div>
+      </el-card>
+
       <el-card class="stat-card" shadow="hover" v-if="!isAdmin">
         <div class="stat-content">
           <div class="stat-icon delay-icon">
@@ -65,7 +77,7 @@
           </div>
         </div>
       </el-card>
-      
+
       <el-card class="stat-card" shadow="hover" v-if="!isAdmin">
         <div class="stat-content">
           <div class="stat-icon hour-icon">
@@ -274,6 +286,7 @@ export default {
       this.stats.totalUsers = overview.totalUsers
       this.stats.totalProjects = overview.totalProjects
       this.stats.totalTasks = overview.totalTasks
+      this.stats.totalHour = overview.taskStats.totalHour
       
       const projectsResponse = await getProjects({ page: 1, pageSize: 1000, sortBy: 'id', sortOrder: 'desc' })
       const allProjects = projectsResponse.data.rows
