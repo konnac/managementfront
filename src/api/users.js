@@ -61,3 +61,27 @@ export function changePassword(data) {
     data
   })
 }
+
+// 获取项目经理列表
+export function getProjectManagers() {
+  return request({
+    url: '/users/project-managers',
+    method: 'get'
+  })
+}
+
+// 获取可用用户列表（用于项目成员选择）
+export function getAvailableUsers() {
+  return request({
+    url: '/users/available-users',
+    method: 'get'
+  })
+}
+
+// 获取通知接收人列表
+export function getNotificationRecipients() {
+  return request({
+    url: '/users/notification-recipients',
+    method: 'get'
+  })
+}

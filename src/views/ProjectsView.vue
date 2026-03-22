@@ -116,7 +116,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getProjects, addProject, deleteProject, updateProject } from '../api/projects'
-import { getUsers } from '../api/users'
+import { getProjectManagers } from '../api/users'
 import ProjectFormModal from '../components/ProjectFormModal.vue'
 
 export default {
@@ -221,8 +221,8 @@ export default {
     // 加载用户列表（用于选择项目经理）
     async loadUsers() {
       try {
-        const response = await getUsers({ page: 1, pageSize: 1000, role: 'PROJECT_MANAGER' })
-        this.usersList = response.data.rows
+        const response = await getProjectManagers()
+        this.usersList = response.data
       } catch (error) {
         this.$message.error('加载用户列表失败')
         console.error(error)

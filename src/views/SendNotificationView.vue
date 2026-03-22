@@ -93,7 +93,7 @@
 import { sendNorNotification, sendSysNotification, sendNotificationToProjectMembers, sendNotificationToTaskMembers } from '../api/notifications'
 import { getProjects } from '../api/projects'
 import { getTasks } from '../api/tasks'
-import { getUsers } from '../api/users'
+import { getNotificationRecipients } from '../api/users'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -198,8 +198,8 @@ export default {
     },
     async loadUsers() {
       try {
-        const response = await getUsers({ page: 1, pageSize: 1000 })
-        this.usersList = response.data.rows || []
+        const response = await getNotificationRecipients()
+        this.usersList = response.data || []
       } catch (error) {
         this.$message.error('加载用户列表失败')
         console.error(error)

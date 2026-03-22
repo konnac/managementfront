@@ -109,7 +109,7 @@
 <script>
 /* eslint-disable no-unused-vars */
 import { getProjects, getProjectMembers, addProjectMember, updateProjectMemberRole, removeProjectMember, activateProjectMember } from '../api/projects'
-import { getUsers } from '../api/users'
+import { getAvailableUsers } from '../api/users'
 import { mapGetters } from 'vuex'
 import ProjectMemberFormModal from '../components/ProjectMemberFormModal.vue'
 
@@ -292,8 +292,8 @@ export default {
     // 获取可选用户列表
     async loadAvailableUsers() {
       try {
-        const response = await getUsers({ page: 1, pageSize: 1000, excludeRoles: 'ADMIN,PROJECT_MANAGER' })
-        const allUsers = response.data.rows
+        const response = await getAvailableUsers()
+        const allUsers = response.data
         
         const memberUserIds = this.membersList.map(member => member.userId || member.id)
         this.availableUsers = allUsers.filter(user => !memberUserIds.includes(user.id))
@@ -446,8 +446,7 @@ export default {
         if (this.projectId) {
           Promise.all([
             this.loadProjectInfo(),
-            this.loadMembersList(),
-            this.loadAvailableUsers()
+            this.loadMembersList()
           ]).finally(() => {
             this.loading = false
           })
@@ -465,8 +464,7 @@ export default {
     if (this.projectId) {
       Promise.all([
         this.loadProjectInfo(),
-        this.loadMembersList(),
-        this.loadAvailableUsers()
+        this.loadMembersList()
       ]).finally(() => {
         this.loading = false
       })
